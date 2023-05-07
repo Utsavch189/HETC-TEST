@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} All Student Records {% endblock title %}
+
+{% block body %}
+
+<section class="bg-light p-5">
+   <button id="download" type="button" class=" my-2 btn btn-primary">Dowload Details</button>
+   <h3 class="pb-4 my-2">Student Records</h3>
+
+   <div class="table-responsive table table-bordered">
+      <table class="table bg-white" id="example-table">
+         <thead class="bg-dark text-light">
+            <tr>
+               <th>User ID</th>
+               <th>Full Name</th>
+               <th>DOB</th>
+               <th>Contact</th>
+               <th>Email</th>
+               <th>School / College</th>
+               <th>Last Seen (Exam)</th>
+               <th>Obtained Marks</th>
+            </tr>
+         </thead>
+         <tbody id="dog"></tbody>
+      </table>
+   </div>
+</section>
+
+<script>
+   const btnn = document.getElementById("dog");
+   function cat() {
+      fetch(`${window.location.origin}/teacher/student-api/`).then(res => res.json())
+         .then(data => btnn.innerHTML = data.map((values, key) =>
+         `
+         <tr>
+            <td>${values['user_id']}</td>
+            <td>${values['full_name'][0]['full_name']}</td>
+            <td>${values['date_of_birth'][0]['date_of_birth']}</td>
+            <td>${values['contact'][0]['contact']} </td>
+            <td>${values['email'][0]['email']}</td>
+            <td>${values['institute_name'][0]['school_college_name']}</td>
+            <td>${values['last_seen'][0]['last_seen']}</td>
+            <td>${values['total_marks'][0]['total_marks']}</td>
+         </tr>
+         `
+      ))
+   }
+
+   cat();
+
+   document.getElementById('download').addEventListener('click', function () {
+      var tableToExcel = new Table2Excel();
+      tableToExcel.export(document.querySelectorAll("#example-table"))
+   });
+</script>
+
+{% endblock body %}
