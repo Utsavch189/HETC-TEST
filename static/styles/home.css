@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya:ital@1&family=Libre+Baskerville&family=Montserrat:ital,wght@1,300&family=Open+Sans:ital,wght@1,300&family=PT+Sans+Narrow&family=Playfair+Display:ital@0;1&family=Roboto+Condensed&family=Source+Serif+Pro:ital,wght@1,300&family=Zen+Antique+Soft&display=swap');
 .main {
     width: 100vw;
-    height: 94.19dvh;
+    height: 94.19vh;
     /* height: 90.99vh; */
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.87)), url('../pics/hetc2.jpg');
     background-position: center;
