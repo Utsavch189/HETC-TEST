@@ -125,14 +125,14 @@ def register(request,qr):
             text_message=f'''
                 Hi {fullname},
 
-                Your application for scholarship test was submitted successfully. You will receive an email from support@hetc.bedigit.in. Please check your spam and mark it as Not Spam.
-                USERID : {userid}
-                Password: {password}
+            Your application for scholarship test was submitted successfully. You will receive an email from support@hetc.bedigit.in. Please check your spam and mark it as Not Spam.
+            USERID : {userid}
+            Password: {password}
 
-                Thanks,
-                HETC Scholarship Team
+            Thanks,
+            HETC Scholarship Team
             '''
-            SendSms(phone,text_message).send()
+            #SendSms(phone,text_message).send()
             messages.success(request, 'Your Registration is completed. Check Your Email To get User ID and Password')
 
     return render(request, 'candidate/register.html', {'dictt': dictt})
