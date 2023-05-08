@@ -1,7 +1,6 @@
 import json
 import datetime
 
-from django.urls import reverse
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
@@ -16,6 +15,7 @@ from django.contrib.sites.shortcuts import get_current_site
 
 from .models import *
 from .helper import timer, is_exam, user_id, hashed2, verified, eliminate, last_seen, date_over, time_ahead, user_password, is_exam_running, record_is_duplicate
+from SmsServer.sms import SendSms
 
 def home(request):
     date_ob = Detail.objects.first()
@@ -122,6 +122,17 @@ def register(request,qr):
 
             mail_sender = 'support@hetc.bedigit.in'
             send_mail(subject, body, mail_sender, [email], fail_silently=False)
+            text_message=f'''
+                Hi {fullname},
+
+                Your application for scholarship test was submitted successfully. You will receive an email from support@hetc.bedigit.in. Please check your spam and mark it as Not Spam.
+                USERID : {userid}
+                Password: {password}
+
+                Thanks,
+                HETC Scholarship Team
+            '''
+            SendSms(phone,text_message).send()
             messages.success(request, 'Your Registration is completed. Check Your Email To get User ID and Password')
 
     return render(request, 'candidate/register.html', {'dictt': dictt})
