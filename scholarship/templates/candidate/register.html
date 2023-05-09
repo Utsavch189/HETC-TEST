@@ -21,7 +21,7 @@
     </div>
     {% endfor %}
 
-    <form method="POST" action="/register/qr={{dictt.with_qr}}" name="form1">
+    <form method="POST" action="/register/qr={{dictt.with_qr}}" name="form1" onsubmit="return submitUserForm();" class="my-4">
         {% csrf_token %}
         <div class="mb-3">
             <label for="fname" class="form-label">Full Name</label>
@@ -129,12 +129,28 @@
             <label for="stream" class="form-label">Name Your Preferred Stream</label>
             <input type="text" class="form-control" id="stream" name="stream" placeholder="Your Preferred Stream" required>
         </div>
+        <div class="g-recaptcha" data-sitekey="6LfOEvMlAAAAAGssExYYEs1InDcAQJz0gk1ia8Kl" data-callback="verifyCaptcha"></div>
+        <div id="g-recaptcha-error"></div>
+        <br/>
         <button type="submit" class="btn btn-primary" value="register">Submit</button>
     </form>
 </div>
 {% endif %}
-
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
+    var recaptcha_response = '';
+    function submitUserForm() {
+        if(recaptcha_response.length == 0) {
+            document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+            return false;
+        }
+        return true;
+    }
+    
+    function verifyCaptcha(token) {
+        recaptcha_response = token;
+        document.getElementById('g-recaptcha-error').innerHTML = '';
+    }
 	function changeFunc(value) {
 		if (value == "Other") {
 			document.getElementById("hidecode").style.display = "block";

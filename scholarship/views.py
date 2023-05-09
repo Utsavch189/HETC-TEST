@@ -113,7 +113,7 @@ def register(request,qr):
             Please use this link to verify your account
             {activate_url}
             Make sure you don't share this link publicly, because its unique for you!\n
-            Examination Date & Time: 28.05.2022 & 11:00pm\n
+            Examination Date & Time: 21.05.2023 & 11:00am\n
             For more updates and information visit www.hetc.ac.in\n
             Regards,
             Admission Cell, HETC
@@ -123,16 +123,12 @@ def register(request,qr):
             mail_sender = 'support@hetc.bedigit.in'
             send_mail(subject, body, mail_sender, [email], fail_silently=False)
             text_message=f'''
-                Hi {fullname},
-
-            Your application for scholarship test was submitted successfully. You will receive an email from support@hetc.bedigit.in. Please check your spam and mark it as Not Spam.
-            USERID : {userid}
-            Password: {password}
+            Hi {fullname},Your application for scholarship test was submitted successfully. You will receive an email from support@hetc.bedigit.in. Please check your spam and mark it as Not Spam in your email.USERID : {userid}Password: {password}
 
             Thanks,
             HETC Scholarship Team
             '''
-            #SendSms(phone,text_message).send()
+            SendSms(phone,text_message).send()
             messages.success(request, 'Your Registration is completed. Check Your Email To get User ID and Password')
 
     return render(request, 'candidate/register.html', {'dictt': dictt})
