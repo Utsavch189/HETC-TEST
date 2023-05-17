@@ -128,7 +128,7 @@ def register(request,qr):
             Thanks,
             HETC Scholarship Team
             '''
-            SendSms(phone,text_message).send()
+            #SendSms(phone,text_message).send()
             messages.success(request, 'Your Registration is completed. Check Your Email To get User ID and Password')
 
     return render(request, 'candidate/register.html', {'dictt': dictt})
