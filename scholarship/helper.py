@@ -131,13 +131,13 @@ def init_schedule(Details):
             exam_end_time=exam_end)
             ob.save()
 
-            print("supratim531: Exam Schedule Initialized\n")
+            print("LOG : Exam Schedule Initialized\n")
         
         else:
-            print("supratim531: Exam Schedule Already Exists\n")
+            print("LOG : Exam Schedule Already Exists\n")
     
     except:
-        print("supratim531: Detail model does not exist\n")
+        print("LOG : Detail model does not exist\n")
 
 def handle_upload_file(file):
     with open(f'./media/{file.name}', "wb+") as fPtr:
